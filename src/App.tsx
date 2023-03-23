@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./Theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const Reset = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -59,11 +63,14 @@ a{
 `;
 
 export default function App() {
+  const isDark = useRecoilValue(isDarkAtom)
   return (
     <>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme }>
       <Reset />
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
+    </ThemeProvider>
     </>
   );
 }

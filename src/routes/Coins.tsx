@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 40px;
@@ -20,10 +21,11 @@ const Title = styled.h1`
   font-size: 48px;
   font-weight: bold;
   color: ${(props) => props.theme.accentColor};
-  `;
+`;
 const Coin = styled.li`
-  background-color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.liColor};
   color: ${(props) => props.theme.accentColor};
+  border: ${(props) => props.theme.border};
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 15px;
@@ -36,6 +38,7 @@ const Coin = styled.li`
   }
   &:hover {
     background-color: ${(props) => props.theme.accentColor};
+    border: 1px solid ${(props) => props.theme.accentColor};
     a {
       color: ${(props) => props.theme.textColor};
     }
@@ -63,12 +66,19 @@ interface ICoin {
 }
 
 export default function Coins() {
-  const { isLoading, data } = useQuery<ICoin[]>('coins', fetchCoins);
+  const { isLoading, data } = useQuery<ICoin[]>("coins", fetchCoins);
+  const setDarkTheme = useSetRecoilState(isDarkAtom);
+  const toggleTheme = () => {
+    setDarkTheme((prev) => !prev);
+  };
 
   return (
     <Container>
       <Header>
-        <Title>Coins</Title>
+        <Title>
+          Coins
+           <span onClick={toggleTheme}>⭐</span>
+        </Title>
       </Header>
       {isLoading ? (
         <Loader>Now Loading...</Loader>
