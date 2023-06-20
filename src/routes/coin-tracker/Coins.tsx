@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { fetchCoins } from "../api";
+import { fetchCoins } from "../../api";
 import { useSetRecoilState } from "recoil";
-import { isDarkAtom } from "../atoms";
+import { isDarkAtom } from "../../atoms";
 
 const Container = styled.div`
   padding: 40px;
@@ -77,7 +77,7 @@ export default function Coins() {
       <Header>
         <Title>
           Coins
-           <span onClick={toggleTheme}>⭐</span>
+          <span onClick={toggleTheme}>⭐</span>
         </Title>
       </Header>
       {isLoading ? (
@@ -88,7 +88,7 @@ export default function Coins() {
             <Coin key={el.id}>
               <Link
                 to={{
-                  pathname: `/${el.id}`,
+                  pathname: `/coin-tracker/${el.id}`,
                   state: { name: el.name },
                 }}
               >

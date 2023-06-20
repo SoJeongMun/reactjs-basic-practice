@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { fetchChartHistory } from "../api";
+import { fetchChartHistory } from "../../api";
 import ReactApexChart from "react-apexcharts";
 
 interface ChartId {
@@ -30,40 +30,40 @@ export default function Chart({ coinId }: ChartId) {
           type="line"
           series={[
             {
-              name: 'price',
-              data: data?.map((price => Number(price.close))) ?? [],
-            }
+              name: "price",
+              data: data?.map((price) => Number(price.close)) ?? [],
+            },
           ]}
           options={{
-            theme:{
-              mode: 'dark'
+            theme: {
+              mode: "dark",
             },
             chart: {
               height: 500,
               width: 500,
-              background: 'transparent'
+              background: "transparent",
             },
-            stroke:{
-              curve: "smooth"
+            stroke: {
+              curve: "smooth",
             },
             yaxis: {
-              show: false
+              show: false,
             },
             xaxis: {
               axisTicks: {
-                show: false
+                show: false,
               },
               labels: {
-                show: false
+                show: false,
               },
-              type: 'datetime',
-              categories: data?.map((price => price.time_close)) ?? [],
+              type: "datetime",
+              categories: data?.map((price) => price.time_close) ?? [],
             },
             tooltip: {
               y: {
-                formatter: (value) => `${value.toFixed(2)}`
-              }
-            }
+                formatter: (value) => `${value.toFixed(2)}`,
+              },
+            },
           }}
         />
       )}

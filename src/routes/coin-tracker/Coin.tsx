@@ -11,7 +11,7 @@ import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
 import { useQuery } from "react-query";
-import { fetchCoinInfo, fetchCoinPrice } from "../api";
+import { fetchCoinInfo, fetchCoinPrice } from "../../api";
 
 const Container = styled.div`
   padding: 40px;
@@ -149,17 +149,17 @@ export default function Coin() {
           <h2>Price: $ {priceData?.quotes.USD.price.toFixed(3)}</h2>
 
           <Tab isActive={chartMatch !== null}>
-            <Link to={`/${coinId}/chart`}>Chart</Link>
+            <Link to={`/coin-tracker/${coinId}/chart`}>Chart</Link>
           </Tab>
           <Tab isActive={priceMatch !== null}>
-            <Link to={`/${coinId}/price`}>Price</Link>
+            <Link to={`/coin-tracker/${coinId}/price`}>Price</Link>
           </Tab>
 
           <Switch>
-            <Route path={`/${coinId}/price`}>
+            <Route path={`/coin-tracker/${coinId}/price`}>
               <Price />
             </Route>
-            <Route path={`/${coinId}/chart`}>
+            <Route path={`/coin-tracker/${coinId}/chart`}>
               <Chart coinId={coinId} />
             </Route>
           </Switch>
