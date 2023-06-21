@@ -8,8 +8,8 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import styled from "styled-components";
-import Price from "./Price";
-import Chart from "./Chart";
+import Price from "../../components/coin-tracker/Price";
+import Chart from "../../components/coin-tracker/Chart";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinPrice } from "../../api";
 
