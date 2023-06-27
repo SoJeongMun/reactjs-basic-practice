@@ -12,7 +12,7 @@ export default function TodoList() {
       <AddTodo />
       <ul>
         {todoItem.map((el) => (
-          <TodoItem {...el} />
+          <TodoItem key={el.id} {...el} />
         ))}
       </ul>
     </>

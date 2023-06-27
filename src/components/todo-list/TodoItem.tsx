@@ -1,12 +1,32 @@
-import { ITodo } from "../../atoms";
+import { useSetRecoilState } from "recoil";
+import { ITodo, todoState } from "../../atoms";
 
-export default function TodoItem({ id, item, category }: ITodo) {
+export default function TodoItem({ item, category }: ITodo) {
+  const setTodos = useSetRecoilState(todoState);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { name },
+    } = e;
+    console.log(name);
+  };
   return (
-    <li key={id}>
+    <li>
       <p>{item}</p>
-      <button>Done</button>
-      <button>Doing</button>
-      <button>To Do</button>
+      {category !== "TODO" && (
+        <button name="TODO" onClick={handleClick}>
+          To Do
+        </button>
+      )}
+      {category !== "DOING" && (
+        <button name="DOING" onClick={handleClick}>
+          Doing
+        </button>
+      )}
+      {category !== "DONE" && (
+        <button name="DONE" onClick={handleClick}>
+          Done
+        </button>
+      )}
     </li>
   );
 }
