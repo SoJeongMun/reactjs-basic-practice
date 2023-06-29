@@ -63,14 +63,15 @@ a{
 `;
 
 export default function App() {
-  const isDark = useRecoilValue(isDarkAtom)
+  const isDark = useRecoilValue(isDarkAtom);
+
   return (
     <>
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme }>
-      <Reset />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
-    </ThemeProvider>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <Reset />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }

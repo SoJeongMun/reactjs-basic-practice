@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Coins from "./routes/coin-tracker/Coins";
 import Coin from "./routes/coin-tracker/Coin";
-import Home from "./routes/Home";
 import TodoList from "./routes/todo-list/TodoList";
+import Trello from "./routes/trello/Trello";
+import Home from "./routes/Home";
 
 export default function Router() {
   return (
@@ -17,9 +18,9 @@ export default function Router() {
         <Route path="/todo-list">
           <TodoList />
         </Route>
-        {/* <Route path="/trello">
-          <TodoList />
-        </Route> */}
+        <Route path="/trello">
+          <Trello />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
