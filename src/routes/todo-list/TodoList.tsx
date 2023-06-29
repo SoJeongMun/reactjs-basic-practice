@@ -23,9 +23,11 @@ export default function TodoList() {
         <option value={Group.DOING}>DOING</option>
         <option value={Group.DONE}>DONE</option>
       </select>
-      {todoList.map((el) => (
-        <TodoItem key={el.id} {...el} />
-      ))}
+      <ul>
+        {todoList.map((el) => (
+          <TodoItem key={el.id} {...el} />
+        ))}
+      </ul>
     </>
   );
 }

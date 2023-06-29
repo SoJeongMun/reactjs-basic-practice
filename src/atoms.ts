@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { json } from "stream/consumers";
 
 export const isDarkAtom = atom({
   key: "isDark",
@@ -19,6 +20,17 @@ export interface ITodo {
 export const todoState = atom<ITodo[]>({
   key: "todo",
   default: [],
+  effects: [
+    ({ setSelf, onSet }) => {
+      const saved = localStorage.getItem("todo-list");
+      if (saved) setSelf(JSON.parse(saved));
+      onSet((newVal, _, isReset) => {
+        isReset
+          ? localStorage.removeItem("todo-list")
+          : localStorage.setItem("todo-list", JSON.stringify(newVal));
+      });
+    },
+  ],
 });
 export const categoryState = atom<Group>({
   key: "categoryState",
