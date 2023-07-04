@@ -5,6 +5,12 @@ import { fetchCoins } from "../../api";
 import { useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../../atoms";
 
+const Wrapped = styled.div`
+  background: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+  width: 100vw;
+  height: 100vh;
+`;
 const Container = styled.div`
   padding: 40px;
   max-width: 480px;
@@ -73,35 +79,37 @@ export default function Coins() {
   };
 
   return (
-    <Container>
-      <Header>
-        <Title>
-          Coins
-          <span onClick={toggleTheme}>⭐</span>
-        </Title>
-      </Header>
-      {isLoading ? (
-        <Loader>Now Loading...</Loader>
-      ) : (
-        <>
-          {data?.slice(0, 100).map((el) => (
-            <Coin key={el.id}>
-              <Link
-                to={{
-                  pathname: `/coin-tracker/${el.id}`,
-                  state: { name: el.name },
-                }}
-              >
-                <CoinImg
-                  src={`https://cryptocurrencyliveprices.com/img/${el.id}.png`}
-                  alt="coinImg"
-                />
-                {el.name} &rarr;
-              </Link>
-            </Coin>
-          ))}
-        </>
-      )}
-    </Container>
+    <Wrapped>
+      <Container>
+        <Header>
+          <Title>
+            Coins
+            <span onClick={toggleTheme}>⭐</span>
+          </Title>
+        </Header>
+        {isLoading ? (
+          <Loader>Now Loading...</Loader>
+        ) : (
+          <>
+            {data?.slice(0, 100).map((el) => (
+              <Coin key={el.id}>
+                <Link
+                  to={{
+                    pathname: `/coin-tracker/${el.id}`,
+                    state: { name: el.name },
+                  }}
+                >
+                  <CoinImg
+                    src={`https://cryptocurrencyliveprices.com/img/${el.id}.png`}
+                    alt="coinImg"
+                  />
+                  {el.name} &rarr;
+                </Link>
+              </Coin>
+            ))}
+          </>
+        )}
+      </Container>
+    </Wrapped>
   );
 }

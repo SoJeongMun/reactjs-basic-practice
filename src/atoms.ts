@@ -44,3 +44,8 @@ export const todoSelector = selector({
     return todoItems.filter(({ category }) => category === group);
   },
 });
+
+export const trelloTodos = atom({
+  key: "todo",
+  default: ["a", "b", "c", "d", "e", "f"],
+});

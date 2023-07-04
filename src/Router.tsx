@@ -4,22 +4,33 @@ import Coin from "./routes/coin-tracker/Coin";
 import TodoList from "./routes/todo-list/TodoList";
 import Trello from "./routes/trello/Trello";
 import Home from "./routes/Home";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme, trelloTheme } from "./Theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 export default function Router() {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/coin-tracker/:coinId">
-          <Coin />
+          <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <Coin />
+          </ThemeProvider>
         </Route>
         <Route path="/coin-tracker">
-          <Coins />
+          <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <Coins />
+          </ThemeProvider>
         </Route>
         <Route path="/todo-list">
           <TodoList />
         </Route>
         <Route path="/trello">
-          <Trello />
+          <ThemeProvider theme={trelloTheme}>
+            <Trello />
+          </ThemeProvider>
         </Route>
         <Route path="/">
           <Home />

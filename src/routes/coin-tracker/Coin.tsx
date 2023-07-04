@@ -13,6 +13,12 @@ import Chart from "../../components/coin-tracker/Chart";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinPrice } from "../../api";
 
+const Wrapped = styled.div`
+  background: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+  width: 100vw;
+  height: 100vh;
+`;
 const Container = styled.div`
   padding: 40px;
   max-width: 480px;
@@ -128,43 +134,45 @@ export default function Coin() {
   const back = useHistory();
 
   return (
-    <Container>
-      <Header>
-        <Title
-          onClick={() => {
-            back.goBack();
-          }}
-        >
-          {state?.name
-            ? state.name
-            : loading
-            ? "Now Loading..."
-            : infoData?.name}
-        </Title>
-      </Header>
-      {loading ? (
-        <Loader>Now Loading...</Loader>
-      ) : (
-        <>
-          <h2>Price: $ {priceData?.quotes.USD.price.toFixed(3)}</h2>
+    <Wrapped>
+      <Container>
+        <Header>
+          <Title
+            onClick={() => {
+              back.goBack();
+            }}
+          >
+            {state?.name
+              ? state.name
+              : loading
+              ? "Now Loading..."
+              : infoData?.name}
+          </Title>
+        </Header>
+        {loading ? (
+          <Loader>Now Loading...</Loader>
+        ) : (
+          <>
+            <h2>Price: $ {priceData?.quotes.USD.price.toFixed(3)}</h2>
 
-          <Tab isActive={chartMatch !== null}>
-            <Link to={`/coin-tracker/${coinId}/chart`}>Chart</Link>
-          </Tab>
-          <Tab isActive={priceMatch !== null}>
-            <Link to={`/coin-tracker/${coinId}/price`}>Price</Link>
-          </Tab>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/coin-tracker/${coinId}/chart`}>Chart</Link>
+            </Tab>
+            <Tab isActive={priceMatch !== null}>
+              <Link to={`/coin-tracker/${coinId}/price`}>Price</Link>
+            </Tab>
 
-          <Switch>
-            <Route path={`/coin-tracker/${coinId}/price`}>
-              <Price />
-            </Route>
-            <Route path={`/coin-tracker/${coinId}/chart`}>
-              <Chart coinId={coinId} />
-            </Route>
-          </Switch>
-        </>
-      )}
-    </Container>
+            <Switch>
+              <Route path={`/coin-tracker/${coinId}/price`}>
+                <Price />
+              </Route>
+              <Route path={`/coin-tracker/${coinId}/chart`}>
+                <Chart coinId={coinId} />
+              </Route>
+            </Switch>
+          </>
+        )}
+      </Container>
+    </Wrapped>
   );
 }
