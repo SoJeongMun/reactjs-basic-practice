@@ -45,7 +45,14 @@ export const todoSelector = selector({
   },
 });
 
-export const trelloTodos = atom({
+export interface ITrelloTodos {
+  [key: string]: string[];
+}
+export const trelloTodos = atom<ITrelloTodos>({
   key: "todo",
-  default: ["a", "b", "c", "d", "e", "f"],
+  default: {
+    todo: ["a", "b"],
+    doing: ["c", "d", "e"],
+    done: ["f"],
+  },
 });
