@@ -28,7 +28,7 @@ export default function Board({ todoList, boardId }: IBoardProps) {
     <Droppable droppableId={boardId}>
       {(provided) => (
         <Wrapper ref={provided.innerRef} {...provided.droppableProps}>
-          <h1>{boardId.toUpperCase()}</h1>
+          {/* <h1>{boardId.toUpperCase()}</h1> */}
           {todoList.map((todo, i) => (
             <DraggableCard key={todo} todo={todo} i={i} />
           ))}

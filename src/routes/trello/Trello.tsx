@@ -22,14 +22,19 @@ const Boards = styled.div`
 
 export default function Trello() {
   const [todoList, setTodoList] = useRecoilState(trelloTodos);
-  const handleDrag = ({ draggableId, destination, source }: DropResult) => {
-    if (!destination) return;
-    // setTodoList((oldVal) => {
-    //   const copy = [...oldVal];
-    //   copy.splice(source.index, 1);
-    //   copy.splice(destination?.index, 0, draggableId);
-    //   return copy;
-    // });
+  const handleDrag = (info: DropResult) => {
+    const { draggableId, destination, source } = info;
+    if (destination?.droppableId === source?.droppableId) {
+      setTodoList((boards) => {
+        const tmpBoard = [...boards[destination?.droppableId]];
+        tmpBoard.splice(source.index, 1);
+        tmpBoard.splice(destination?.index, 0, draggableId);
+        return {
+          ...boards,
+          [destination?.droppableId]: tmpBoard,
+        };
+      });
+    }
   };
 
   return (

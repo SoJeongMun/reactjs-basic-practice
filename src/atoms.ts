@@ -49,7 +49,7 @@ export interface ITrelloTodos {
   [key: string]: string[];
 }
 export const trelloTodos = atom<ITrelloTodos>({
-  key: "todo",
+  key: "trello",
   default: {
     todo: ["a", "b"],
     doing: ["c", "d", "e"],
